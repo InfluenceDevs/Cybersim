@@ -1,0 +1,20 @@
+{
+  "name": "cybersim-sandbox",
+  "version": "1.3.0",
+  "description": "Local cybersecurity attack simulation sandbox for training and defensive testing",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "cybersecurity",
+    "sandbox",
+    "training",
+    "simulation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

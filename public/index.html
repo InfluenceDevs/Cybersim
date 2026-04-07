@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberSim Sandbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-grid" aria-hidden="true"></div>
+    <main class="layout">
+      <header class="hero">
+        <p class="kicker">DEFENSIVE TRAINING LAB</p>
+        <h1>Cybersecurity Sandbox</h1>
+        <p>
+          Advanced blue-team training console with fake systems, ATT&CK-aligned
+          simulations, debrief analytics, and measurable readiness scoring.
+        </p>
+        <p class="credit-inline">by Influence</p>
+        <p id="runtime-mode" class="mode-chip">Server API Mode</p>
+      </header>
+
+      <section class="panel two-col">
+        <div>
+          <h2>Rubric Editor</h2>
+          <form id="rubric-form">
+            <label
+              >Checkpoint Weight
+              <input id="rubric-checkpointWeight" name="checkpointWeight" aria-label="Checkpoint weight" type="number" min="5" max="50" value="30" />
+            </label>
+            <label
+              >Time Bonus
+              <input id="rubric-timeBonus" name="timeBonus" aria-label="Time bonus" type="number" min="0" max="30" value="10" />
+            </label>
+            <label
+              >Pass Threshold
+              <input id="rubric-passThreshold" name="passThreshold" aria-label="Pass threshold" type="number" min="20" max="100" value="100" />
+            </label>
+            <label
+              >Lockout Threshold
+              <input id="rubric-lockoutThreshold" name="lockoutThreshold" aria-label="Lockout threshold" type="number" min="2" max="12" value="5" />
+            </label>
+            <div class="button-row">
+              <button type="submit">Save Rubric</button>
+              <button id="refresh-rubric" type="button">Load Rubric</button>
+            </div>
+          </form>
+          <pre id="rubric-output" class="output"></pre>
+        </div>
+        <div>
+          <h2>Deployment Mode</h2>
+          <p class="hint">
+            Server API mode uses Node/Express endpoints. Local Browser Mode runs
+            the same training logic in-browser and works on GitHub Pages.
+          </p>
+          <pre id="mode-output" class="output">Mode auto-detected at startup.</pre>
+        </div>
+      </section>
+
+      <section class="panel two-col">
+        <div>
+          <h2>Learning Modules</h2>
+          <button id="load-modules" type="button">Load Guided Tracks</button>
+          <pre id="modules-output" class="output"></pre>
+        </div>
+        <div>
+          <h2>Readiness Scorecard</h2>
+          <button id="refresh-status" type="button">Refresh Score</button>
+          <pre id="status-output" class="output"></pre>
+        </div>
+      </section>
+
+      <section class="panel two-col">
+        <div>
+          <h2>Instructor Mode</h2>
+          <form id="instructor-start-form">
+            <label
+              >Lab
+              <select name="labId" id="lab-select" aria-label="Instructor lab selector"></select>
+            </label>
+            <label
+              >Analyst Name
+              <input name="analyst" aria-label="Analyst name" value="Blue Team Alpha" />
+            </label>
+            <label
+              >Duration (minutes)
+              <input name="durationMinutes" aria-label="Lab duration minutes" type="number" min="5" max="90" value="15" />
+            </label>
+            <button type="submit">Start Timed Lab</button>
+          </form>
+          <div class="button-row">
+            <button id="refresh-sessions" type="button">Refresh Sessions</button>
+            <button id="evaluate-active" type="button">Evaluate Latest Session</button>
+            <button id="close-active" type="button">Close Latest Session</button>
+          </div>
+          <pre id="instructor-output" class="output"></pre>
+        </div>
+
+        <div>
+          <h2>Export Reports</h2>
+          <div class="button-row">
+            <button id="export-json" type="button">Export JSON Report</button>
+            <button id="export-csv-sessions" type="button">Export CSV Sessions</button>
+            <button id="export-csv-events" type="button">Export CSV Events</button>
+          </div>
+          <p class="hint">Preview output appears below for copy/download workflows.</p>
+          <pre id="report-output" class="output"></pre>
+        </div>
+      </section>
+
+      <section class="panel two-col">
+        <div>
+          <h2>Fake Login Panel</h2>
+          <form id="login-form">
+            <label
+              >Username
+              <input name="username" aria-label="Login username" value="admin"
+            /></label>
+            <label
+              >Password
+              <input
+                name="password"
+                aria-label="Login password"
+                type="password"
+                value="wrong-pass"
+            /></label>
+            <button type="submit">Attempt Login</button>
+          </form>
+          <pre id="login-output" class="output"></pre>
+        </div>
+
+        <div>
+          <h2>Fake User API</h2>
+          <form id="lookup-form">
+            <label
+              >Search Query
+              <input name="query" aria-label="User lookup query" value="admin"
+            /></label>
+            <button type="submit">Call /api/users</button>
+          </form>
+          <p class="hint">
+            Try: <code>' OR 1=1 --</code> to test injection blocking.
+          </p>
+          <pre id="lookup-output" class="output"></pre>
+        </div>
+      </section>
+
+      <section class="panel three-col">
+        <div>
+          <h2>Brute Force Simulator</h2>
+          <form id="bruteforce-form">
+            <label
+              >Target Username
+              <input
+                name="username"
+                aria-label="Bruteforce target username"
+                value="admin"
+            /></label>
+            <label
+              >Total Attempts
+              <input
+                name="totalAttempts"
+                aria-label="Bruteforce total attempts"
+                type="number"
+                min="1"
+                max="50"
+                value="20"
+            /></label>
+            <button type="submit">Run Simulation</button>
+          </form>
+          <pre id="bruteforce-output" class="output"></pre>
+        </div>
+
+        <div>
+          <h2>Phishing Simulator</h2>
+          <form id="phishing-form">
+            <label
+              >Campaign Name
+              <input
+                name="campaign"
+                aria-label="Phishing campaign name"
+                value="VPN Compliance Notice"
+            /></label>
+            <label
+              >Lure Type
+              <select name="lureType">
+                <option value="credential_reset">Credential Reset</option>
+                <option value="urgent_invoice">Urgent Invoice</option>
+                <option value="security_alert">Security Alert</option>
+              </select>
+            </label>
+            <label
+              >Targets (comma separated)
+              <input
+                name="targets"
+                aria-label="Phishing target email list"
+                value="alice@corp.local,bob@corp.local,charlie@corp.local"
+              />
+            </label>
+            <button type="submit">Run Campaign</button>
+          </form>
+          <pre id="phishing-output" class="output"></pre>
+        </div>
+
+        <div>
+          <h2>Injection Simulator</h2>
+          <form id="injection-form">
+            <label
+              >Vector
+              <select name="vector">
+                <option value="search">Search</option>
+                <option value="login">Login</option>
+                <option value="id_param">ID Parameter</option>
+              </select>
+            </label>
+            <label
+              >Payload
+              <input name="payload" aria-label="Injection payload" value="' OR 1=1 --"
+            /></label>
+            <button type="submit">Test Payload</button>
+          </form>
+          <pre id="injection-output" class="output"></pre>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Recent Security Events</h2>
+        <button id="refresh-events" type="button">Refresh Event Feed</button>
+        <pre id="events-output" class="output"></pre>
+      </section>
+
+      <section class="panel">
+        <h2>Training Debrief</h2>
+        <p class="hint">
+          Every simulation now includes analyst prompts, recommended controls,
+          and MITRE mapping to teach response workflows.
+        </p>
+        <pre id="debrief-output" class="output"></pre>
+      </section>
+
+      <footer class="panel footer-panel">
+        <p>CyberSim Defensive Training Lab by Influence</p>
+      </footer>
+    </main>
+
+    <script src="localApi.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
