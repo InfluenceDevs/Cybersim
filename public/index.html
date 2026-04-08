@@ -24,7 +24,27 @@
         </p>
         <p class="credit-inline">by Influence</p>
         <p id="runtime-mode" class="mode-chip">Server API Mode</p>
+        <div class="hero-meta">
+          <label
+            >Team Mode
+            <select id="team-mode" aria-label="Team mode selector">
+              <option value="blue">Blue Team (Defender)</option>
+              <option value="red">Red Team (Attacker)</option>
+            </select>
+          </label>
+          <div class="stats-inline">
+            <span>Level: <strong id="player-level">1</strong></span>
+            <span>XP: <strong id="player-xp">0</strong></span>
+            <span>Badges: <strong id="player-badges">0</strong></span>
+          </div>
+        </div>
       </header>
+
+      <section class="panel">
+        <h2>Learning Paths</h2>
+        <p class="hint">Structured progression from fundamentals to applied defense operations.</p>
+        <div id="learning-paths" class="card-grid"></div>
+      </section>
 
       <section class="panel two-col">
         <div>
@@ -60,6 +80,174 @@
             the same training logic in-browser and works on GitHub Pages.
           </p>
           <pre id="mode-output" class="output">Mode auto-detected at startup.</pre>
+        </div>
+      </section>
+
+      <section class="panel two-col">
+        <div>
+          <h2>Fake Terminal Scenarios</h2>
+          <form id="terminal-form">
+            <label
+              >Challenge
+              <select id="terminal-challenge" name="challenge" aria-label="Terminal challenge selector">
+                <option value="find-password">Find password in files</option>
+                <option value="weak-permissions">Exploit weak permissions</option>
+                <option value="decode-base64">Decode base64 strings</option>
+              </select>
+            </label>
+            <label
+              >Command
+              <input name="command" aria-label="Terminal command input" value="cat /srv/secrets/notes.txt" />
+            </label>
+            <button type="submit">Run Command</button>
+          </form>
+          <pre id="terminal-output" class="output"></pre>
+        </div>
+        <div>
+          <h2>File System Explorer</h2>
+          <form id="file-search-form">
+            <label
+              >Search files
+              <input name="query" aria-label="File search query" value="env" />
+            </label>
+            <button type="submit">Search</button>
+          </form>
+          <div class="button-row compact">
+            <button id="open-etc-passwd" type="button">Open /etc/passwd</button>
+            <button id="open-hidden-env" type="button">Open .env</button>
+            <button id="open-config" type="button">Open config</button>
+          </div>
+          <pre id="filesystem-output" class="output"></pre>
+        </div>
+      </section>
+
+      <section class="panel three-col">
+        <div>
+          <h2>Vulnerable Login Lab</h2>
+          <form id="vuln-login-form">
+            <label
+              >Username
+              <input name="username" aria-label="Vulnerable login username" value="admin" />
+            </label>
+            <label
+              >Password / Payload
+              <input name="password" aria-label="Vulnerable login password" value="' OR 1=1 --" />
+            </label>
+            <label
+              >Security Profile
+              <select name="profile" aria-label="Vulnerable login security profile">
+                <option value="vulnerable">Intentionally Vulnerable</option>
+                <option value="hardened">Hardened</option>
+              </select>
+            </label>
+            <button type="submit">Attempt Exploit</button>
+          </form>
+          <pre id="vuln-login-output" class="output"></pre>
+        </div>
+
+        <div>
+          <h2>Vulnerable Mini Websites</h2>
+          <form id="mini-web-form">
+            <label
+              >Lab Type
+              <select name="lab" aria-label="Mini website lab selector">
+                <option value="xss">Reflected XSS</option>
+                <option value="csrf">CSRF Action</option>
+                <option value="upload">File Upload Bypass</option>
+              </select>
+            </label>
+            <label
+              >Input
+              <input name="payload" aria-label="Mini website payload" value="<script>alert(1)</script>" />
+            </label>
+            <button type="submit">Test Lab</button>
+          </form>
+          <pre id="mini-web-output" class="output"></pre>
+        </div>
+
+        <div>
+          <h2>Payload Playground</h2>
+          <form id="payload-form">
+            <label
+              >Vector
+              <select name="vector" aria-label="Payload playground vector">
+                <option value="xss">XSS</option>
+                <option value="sqli">SQL Injection</option>
+                <option value="cmd">Command Injection</option>
+              </select>
+            </label>
+            <label
+              >Payload
+              <input name="payload" aria-label="Payload playground input" value="<script>alert(1)</script>" />
+            </label>
+            <button type="submit">Simulate</button>
+          </form>
+          <pre id="payload-output" class="output"></pre>
+        </div>
+      </section>
+
+      <section class="panel three-col">
+        <div>
+          <h2>Phishing Detection Game</h2>
+          <p id="phish-question" class="hint">Press "New Email" to begin.</p>
+          <div class="button-row compact">
+            <button id="phish-new" type="button">New Email</button>
+            <button id="phish-safe" type="button">Mark Safe</button>
+            <button id="phish-bad" type="button">Mark Phishing</button>
+          </div>
+          <pre id="phish-output" class="output"></pre>
+        </div>
+
+        <div>
+          <h2>Password Cracking Simulator</h2>
+          <form id="crack-form">
+            <label
+              >Target Hash
+              <select name="hash" aria-label="Hash selector">
+                <option value="5f4dcc3b5aa765d61d8327deb882cf99">MD5(password)</option>
+                <option value="0d107d09f5bbe40cade3de5c71e9e9b7">MD5(letmein)</option>
+                <option value="482c811da5d5b4bc6d497ffa98491e38">MD5(password123)</option>
+              </select>
+            </label>
+            <label
+              >Attack Type
+              <select name="attack" aria-label="Attack type selector">
+                <option value="dictionary">Dictionary</option>
+                <option value="bruteforce">Brute force</option>
+              </select>
+            </label>
+            <button type="submit">Start Cracking</button>
+          </form>
+          <div class="progress-wrap"><div id="crack-progress" class="progress-bar"></div></div>
+          <pre id="crack-output" class="output"></pre>
+        </div>
+
+        <div>
+          <h2>Network Scan & Attack Choice</h2>
+          <button id="run-scan" type="button">Run Fake Scan</button>
+          <form id="network-attack-form">
+            <label
+              >Target Port
+              <select name="port" aria-label="Network target port">
+                <option value="22">22 / ssh</option>
+                <option value="80">80 / http</option>
+                <option value="443">443 / https</option>
+              </select>
+            </label>
+            <button type="submit">Choose Attack</button>
+          </form>
+          <pre id="network-output" class="output"></pre>
+        </div>
+      </section>
+
+      <section class="panel two-col">
+        <div>
+          <h2>Challenge Levels</h2>
+          <div id="levels-output" class="card-grid"></div>
+        </div>
+        <div>
+          <h2>Progress Tracker</h2>
+          <pre id="progress-output" class="output"></pre>
         </div>
       </section>
 

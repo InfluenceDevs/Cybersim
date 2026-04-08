@@ -4,6 +4,15 @@ Advanced local cybersecurity training lab for defensive teams.
 
 by Influence
 
+## Platform update (v2 experience)
+
+CyberSim now includes a complete challenge platform UX with:
+
+- Red Team / Blue Team mode switching
+- Learning paths and level progression
+- XP + badges + weak-area tracking
+- Beginner-friendly CTF-style tasks in realistic simulations
+
 ## Why this is different
 
 This project is built to teach, not just simulate attacks.
@@ -31,6 +40,18 @@ Each simulation returns:
 - Report export (JSON/CSV): `/api/report/export/json`, `/api/report/export/csv`
 - Event feed: `/api/events`
 - Live scorecard: `/api/status`
+
+## New challenge modules
+
+- Fake terminal attack scenarios
+- Vulnerable login lab (SQLi, weak password, no rate-limit simulation)
+- Vulnerable mini-web labs (XSS, CSRF, upload bypass)
+- File system explorer
+- Phishing detection game
+- Password cracking simulator
+- Basic network scan and attack-choice panel
+- Payload playground
+- Progress tracker and challenge levels
 
 ## Learning model
 
@@ -90,4 +111,6 @@ The workflow file [.github/workflows/deploy-pages.yml](.github/workflows/deploy-
 - [docs/SCENARIO_PLAYBOOK.md](docs/SCENARIO_PLAYBOOK.md)
 - [docs/INSTRUCTOR_MODE.md](docs/INSTRUCTOR_MODE.md)
 - [docs/REPORTING.md](docs/REPORTING.md)
+- [docs/LEARNING_PATHS.md](docs/LEARNING_PATHS.md)
+- [docs/CHALLENGE_MODULES.md](docs/CHALLENGE_MODULES.md)
 - [docs/CREDITS.md](docs/CREDITS.md)
